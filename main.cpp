@@ -1,6 +1,6 @@
 #include"DoublePendulum.h"
 
-int main() {
+int main(){
 
-	cout << "hello";
+    return 0;
 }
