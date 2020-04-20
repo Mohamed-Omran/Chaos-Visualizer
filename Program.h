@@ -5,6 +5,7 @@ class Program {
 private:
 	Interface interface;
 	DoublePendulum dp;
+	sf::Vector2f pos;
 
 public:
 	Program();

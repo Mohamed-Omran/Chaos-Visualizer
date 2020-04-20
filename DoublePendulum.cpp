@@ -3,6 +3,7 @@
 DoublePendulum::DoublePendulum(double m1, double m2, double l1, double l2, double theta1, double theta2,double omega1, double omega2, double stepSize, sf::Vector2f pos)
 				:m1(m1), m2(m2), l1(l1), l2(l2), theta1(theta1), theta2(theta2),omega1(omega1), omega2(omega2), stepSize(stepSize), pos(pos)
 {
+
 }
 
 void DoublePendulum::setPosition(sf::Vector2f pos) {
@@ -11,7 +12,8 @@ void DoublePendulum::setPosition(sf::Vector2f pos) {
 }
 
 void DoublePendulum::which_H(double h) {
-	// defining some internal variables that won't make me write long lines.
+    double conv = 3.14192 / 180.0;
+    // defining some internal variables that won't make me write long lines.
 	double I1_1 = -g * (2 * m1 + m2) * sin(theta1 +h*stepSize);
 	double I1_2 = -m2 * g * sin((theta1 + h * stepSize) - 2 * theta2);
 	double I1_3 = -2 * sin(theta1 + h * stepSize - theta2) * m2 * (omega2 * omega2 * l2 + omega1 * omega1 * l1 * cos(theta1 - theta2));
@@ -34,15 +36,15 @@ void DoublePendulum::update_RK4() {
 
     // Calculate Omega1
 
-    double l0 = (-g * (2 * m1 + m2) * sin(theta1) - m2 * g * sin(theta1 - 2 * theta2) - 2 * sin(theta1 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
+    double I0 = (-g * (2 * m1 + m2) * sin(theta1) - m2 * g * sin(theta1 - 2 * theta2) - 2 * sin(theta1 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
+    
+    double I1 = (-g * (2 * m1 + m2) * sin(theta1 + stepSize * 0.5 * I0) - m2 * g * sin(theta1 + stepSize * 0.5 * I0 - 2 * theta2) - 2 * sin(theta1 + stepSize * 0.5 * I0 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * 0.5 * I0 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
 
-    double l1 = (-g * (2 * m1 + m2) * sin(theta1 + stepSize * 0.5 * l0) - m2 * g * sin(theta1 + stepSize * 0.5 * l0 - 2 * theta2) - 2 * sin(theta1 + stepSize * 0.5 * l0 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * 0.5 * l0 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
+    double I2 = (-g * (2 * m1 + m2) * sin(theta1 + stepSize * 0.5 * l1) - m2 * g * sin(theta1 + stepSize * 0.5 * l1 - 2 * theta2) - 2 * sin(theta1 + stepSize * 0.5 * l1 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * 0.5 * l1 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
 
-    double l2 = (-g * (2 * m1 + m2) * sin(theta1 + stepSize * 0.5 * l1) - m2 * g * sin(theta1 + stepSize * 0.5 * l1 - 2 * theta2) - 2 * sin(theta1 + stepSize * 0.5 * l1 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * 0.5 * l1 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
+    double I3 = (-g * (2 * m1 + m2) * sin(theta1 + stepSize * I2) - m2 * g * sin(theta1 + stepSize * I2 - 2 * theta2) - 2 * sin(theta1 + stepSize * I2 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * I2 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
 
-    double l3 = (-g * (2 * m1 + m2) * sin(theta1 + stepSize * l2) - m2 * g * sin(theta1 + stepSize * l2 - 2 * theta2) - 2 * sin(theta1 + stepSize * l2 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * l2 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
-
-    double u2soln = omega1 + (stepSize / 6.0) * (l0 + 2 * l1 + 2 * l2 + l3);
+    double u2soln = omega1 + (stepSize / 6.0) * (I0 + 2 * I1 + 2 * I2 + I3);
 
     // Calculate theta1
     double k0 = omega1;

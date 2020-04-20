@@ -10,7 +10,7 @@ using namespace std;
 
 class Interface {
 private:
-	sf::Window window;
+	sf::RenderWindow window;
 	
 
 public:
@@ -20,6 +20,8 @@ public:
 	// Clears the frame (first step in rendering a new frame)
 	void clear();
 
+
+	void control();
 	// Displays the frame (last step in rendering a new frame)
 	void display();
 

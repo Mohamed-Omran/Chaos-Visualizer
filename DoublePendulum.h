@@ -1,5 +1,4 @@
 #pragma once
-
 #include<iostream>
 #include <cmath>
 #include"SFML\Graphics.hpp"
@@ -8,9 +7,11 @@
 #include "Interface.h"
 
 using namespace std;
+const double pi = 3.14159;
 
 class DoublePendulum {
 private:
+
 	double m1, m2, l1, l2, theta1, theta2, omega1, omega2, g=9.81;  // the main characterstics and initial conditions for the angles.
 	double stepSize, acc1, acc2; // for RK4
 	sf::Vector2f pos;
