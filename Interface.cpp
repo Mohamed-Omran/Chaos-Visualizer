@@ -28,8 +28,8 @@ void Interface::drawDP(double m1, double m2, double l1, double l2, double theta1
 	sf::Vector2f center1 (pos.x + l1 * sin(theta1 ),(float) pos.y + l1 * cos(theta1 ) );
 	sf::Vector2f center2 ( center1.x + l2 * sin(theta2 ), center1.y + l2 * cos(theta2));
 	
-
-	 cout << center1.x << "  " << center1.y << "  " << center2.x << "  " << center2.y << endl;
+	cout << theta1 << "  " << theta2 << endl;
+	 //cout << center1.x << "  " << center1.y << "  " << center2.x << "  " << center2.y << endl;
 	// origin circle:
 	sf::CircleShape origin(7.0);
 	origin.setOrigin(7.0,7.0);
@@ -48,7 +48,7 @@ void Interface::drawDP(double m1, double m2, double l1, double l2, double theta1
 	sf::CircleShape mass2(10.0);
 	mass2.setOrigin(10.0,10.0);
 	mass2.setPosition(center2);
-	origin.setFillColor(sf::Color::Blue);
+	origin.setFillColor(sf::Color(250,50,40));
 	//cout << mass2.getPosition().x << "  " << mass2.getPosition().y << endl;
 	window.draw(mass2);
 

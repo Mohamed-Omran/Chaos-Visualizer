@@ -7,7 +7,7 @@ int main(){
     while (true) {
         demo.simulate();
         demo.updateInterface();
-        Sleep(1000);
+     //   Sleep(100);
     }
 
     return 0;

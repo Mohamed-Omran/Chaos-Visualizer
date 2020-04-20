@@ -22,10 +22,6 @@ public:
 	//  sets the position of the pivot point on canvas
 	void setPosition(sf::Vector2f pos );
 
-
-	// used in the internal computations of the RK4 method
-	void which_H(double h);
-
 	// calculates the pendulum's next position based 4th Runge-Kutta method.
 	void update_RK4();
 
