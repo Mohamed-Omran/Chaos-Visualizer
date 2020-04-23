@@ -28,7 +28,7 @@ void Interface::drawDP(double m1, double m2, double l1, double l2, double theta1
 	sf::Vector2f center1 (pos.x + l1 * sin(theta1 ),(float) pos.y + l1 * cos(theta1 ) );
 	sf::Vector2f center2 ( center1.x + l2 * sin(theta2 ), center1.y + l2 * cos(theta2));
 	
-	cout << theta1 << "  " << theta2 << endl;
+	//cout << theta1 << "  " << theta2 << endl;
 	 //cout << center1.x << "  " << center1.y << "  " << center2.x << "  " << center2.y << endl;
 	
 

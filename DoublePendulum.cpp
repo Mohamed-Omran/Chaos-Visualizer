@@ -15,6 +15,10 @@ void DoublePendulum::setPosition(sf::Vector2f pos) {
 // this function needs a thorough look for potential optimization
 void DoublePendulum::update_RK4() {
 
+
+    double potential = -(m1 + m2) * g * l1 * cos(theta1) - m2 * g * l2 * cos(theta2);
+    double kinetic = 0.5 * m1 * l1 * l1 * omega1 * omega1 + 0.5 * m2 * ((l1 * l1 * omega1 * omega1) + (l2 * l2 * omega2 * omega2) + 2 * l1 * l2 * omega1 * omega2 * cos(theta1 - theta2));
+    cout << kinetic <<"  "<< potential<< "  " <<kinetic + potential<< endl;
     // Calculate Omega1
     // these four variable are the K's of RK4
         double I0 =(-g * (2 * m1 + m2) * sin(theta1) - m2 * g * sin(theta1 - 2 * theta2) - 2 * sin(theta1 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
