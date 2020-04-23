@@ -23,11 +23,11 @@ void DoublePendulum::update_RK4() {
     // these four variable are the K's of RK4
         double I0 =(-g * (2 * m1 + m2) * sin(theta1) - m2 * g * sin(theta1 - 2 * theta2) - 2 * sin(theta1 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
 
-        double I1 =(-g * (2 * m1 + m2) * sin(theta1 + stepSize * 0.5 * I0) - m2 * g * sin(theta1 + stepSize * 0.5 * I0 - 2 * theta2) - 2 * sin(theta1 + stepSize * 0.5 * I0 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * 0.5 * I0 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * (theta1 + stepSize * 0.5 * I0) - 2 * theta2)));
+        double I1 =(-g * (2 * m1 + m2) * sin(theta1) - m2 * g * sin(theta1 - 2 * theta2) - 2 * sin(theta1 - theta2) * m2 * (pow(omega2, 2) * l2 + pow((omega1 + stepSize * 0.5 * I0), 2) * l1 * cos(theta1 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
 
-        double I2 =(-g * (2 * m1 + m2) * sin(theta1 + stepSize * 0.5 * I1) - m2 * g * sin(theta1 + stepSize * 0.5 * I1 - 2 * theta2) - 2 * sin(theta1 + stepSize * 0.5 * I1 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * 0.5 * I1 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * (theta1 + stepSize * 0.5 * I1) - 2 * theta2)));
+        double I2 =(-g * (2 * m1 + m2) * sin(theta1) - m2 * g * sin(theta1 - 2 * theta2) - 2 * sin(theta1 - theta2) * m2 * (pow(omega2, 2) * l2 + pow((omega1 + stepSize * 0.5 * I1), 2) * l1 * cos(theta1 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
 
-        double I3 =(-g * (2 * m1 + m2) * sin(theta1 + stepSize * I2) - m2 * g * sin(theta1 + stepSize * I2 - 2 * theta2) - 2 * sin(theta1 + stepSize * I2 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * I2 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * (theta1*stepSize*I2) - 2 * theta2)));
+        double I3 =(-g * (2 * m1 + m2) * sin(theta1) - m2 * g * sin(theta1 - 2 * theta2) - 2 * sin(theta1 - theta2) * m2 * (pow(omega2, 2) * l2 + pow((omega1 + stepSize * I2), 2) * l1 * cos(theta1 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
 
         double omega1New = omega1 + (stepSize/ 6.0) * (I0 + 2 * I1 + 2 * I2 + I3);
 
@@ -45,11 +45,11 @@ void DoublePendulum::update_RK4() {
     // these four variable are the K's of RK4
     double t0 = (2 * sin(theta1 - theta2) * (pow(omega1, 2) * l1 * (m1 + m2) + g * (m1 + m2) * cos(theta1) + pow(omega2, 2) * l2 * m2 * cos(theta1 - theta2))) / (l2 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * theta2)));
 
-    double t1 = (2 * sin(theta1 - theta2 + stepSize * 0.5 * t0) * (pow(omega1, 2) * l1 * (m1 + m2) + g * (m1 + m2) * cos(theta1) + pow(omega2, 2) * l2 * m2 * cos(theta1 - theta2 + stepSize * 0.5 * t0))) / (l2 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * (theta2 + stepSize * 0.5 * t0))));
+    double t1 = (2 * sin(theta1 - theta2) * (pow(omega1, 2) * l1 * (m1 + m2) + g * (m1 + m2) * cos(theta1) + pow((omega2 + stepSize * 0.5 * t0), 2) * l2 * m2 * cos(theta1 - theta2 ))) / (l2 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * (theta2 ))));
 
-    double t2 = (2 * sin(theta1 - theta2 + stepSize * 0.5 * t1) * (pow(omega1, 2) * l1 * (m1 + m2) + g * (m1 + m2) * cos(theta1) + pow(omega2, 2) * l2 * m2 * cos(theta1 - theta2 + stepSize * 0.5 * t1))) / (l2 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * (theta2 + stepSize * 0.5 * t1))));
+    double t2 = (2 * sin(theta1 - theta2) * (pow(omega1, 2) * l1 * (m1 + m2) + g * (m1 + m2) * cos(theta1) + pow((omega2 + stepSize * 0.5 * t1), 2) * l2 * m2 * cos(theta1 - theta2))) / (l2 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 * (theta2 ))));
 
-    double t3 = (2 * sin(theta1 - theta2 + stepSize * t2) * (pow(omega1, 2) * l1 * (m1 + m2) + g * (m1 + m2) * cos(theta1) + pow(omega2, 2) * l2 * m2 * cos(theta1 - theta2 + stepSize * t2))) / (l2 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 *( theta2 + stepSize * t2))));
+    double t3 = (2 * sin(theta1 - theta2) * (pow(omega1, 2) * l1 * (m1 + m2) + g * (m1 + m2) * cos(theta1) + pow((omega2 + stepSize * t2), 2) * l2 * m2 * cos(theta1 - theta2))) / (l2 * (2 * m1 + m2 - m2 * cos(2 * theta1 - 2 *( theta2 ))));
 
     double omega2New = omega2 + (stepSize / 6.0) * (t0 + 2 * t1 + 2 * t2 + t3);
 
