@@ -30,29 +30,38 @@ void Interface::drawDP(double m1, double m2, double l1, double l2, double theta1
 	
 	cout << theta1 << "  " << theta2 << endl;
 	 //cout << center1.x << "  " << center1.y << "  " << center2.x << "  " << center2.y << endl;
-	// origin circle:
-	sf::CircleShape origin(7.0);
-	origin.setOrigin(7.0,7.0);
+	
+
+	sf::Vertex line1[] = { sf::Vertex(pos), sf::Vertex(center1) };
+
+	window.draw(line1, 2, sf::Lines);
+
+
+	sf::Vertex line2[] = { sf::Vertex(center1), sf::Vertex(center2) };
+
+	window.draw(line2, 2, sf::Lines);
+	 
+	 // origin circle:
+	sf::CircleShape origin(5.0);
+	origin.setOrigin(5.0,5.0);
 	origin.setPosition(pos);
-	origin.setFillColor(sf::Color::Green);
+	origin.setFillColor(sf::Color::White);
 	window.draw(origin);
 
 	// mass1 :
 	sf::CircleShape mass1(15.0);
 	mass1.setOrigin(15.0,15.0);
 	mass1.setPosition(center1);
-	mass1.setFillColor(sf::Color::Green);
+	mass1.setFillColor(sf::Color::Magenta);
 	window.draw(mass1);
 
 
-	sf::CircleShape mass2(10.0);
-	mass2.setOrigin(10.0,10.0);
+	sf::CircleShape mass2(15.0);
+	mass2.setOrigin(15.0,15.0);
 	mass2.setPosition(center2);
-	origin.setFillColor(sf::Color(250,50,40));
+	mass2.setFillColor(sf::Color::Cyan);
 	//cout << mass2.getPosition().x << "  " << mass2.getPosition().y << endl;
 	window.draw(mass2);
-
-
 
 
 	//// first arm:
