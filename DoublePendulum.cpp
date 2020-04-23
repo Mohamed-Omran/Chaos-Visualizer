@@ -23,7 +23,7 @@ void DoublePendulum::update_RK4() {
 
         double I2 =(-g * (2 * m1 + m2) * sin(theta1 + stepSize * 0.5 * I1) - m2 * g * sin(theta1 + stepSize * 0.5 * I1 - 2 * theta2) - 2 * sin(theta1 + stepSize * 0.5 * I1 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * 0.5 * I1 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * (theta1 + stepSize * 0.5 * I1) - 2 * theta2)));
 
-        double I3 =(-g * (2 * m1 + m2) * sin(theta1 + stepSize * I2) - m2 * g * sin(theta1 + stepSize * I2 - 2 * theta2) - 2 * sin(theta1 + stepSize * I2 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * I2 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * (theta1*stepSize*I2) - 2 * theta2)));
+        double I3 =(-g * (2 * m1 + m2) * sin(theta1 + stepSize * I2) - m2 * g * sin(theta1 + stepSize * I2 - 2 * theta2) - 2 * sin(theta1 + stepSize * I2 - theta2) * m2 * (pow(omega2, 2) * l2 + pow(omega1, 2) * l1 * cos(theta1 + stepSize * I2 - theta2))) / (l1 * (2 * m1 + m2 - m2 * cos(2 * (theta1 + stepSize * I2) - 2 * theta2)));
 
         double omega1New = omega1 + (stepSize/ 6.0) * (I0 + 2 * I1 + 2 * I2 + I3);
 
