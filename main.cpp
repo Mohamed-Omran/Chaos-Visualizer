@@ -5,9 +5,10 @@ int main(){
     Program demo;
 
     while (true) {
-        demo.simulate();
+       
         demo.updateInterface();
-        //Sleep(100);
+        demo.simulate();
+        //Sleep(10);
     }
 
     return 0;

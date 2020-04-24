@@ -7,7 +7,7 @@
 #include "Interface.h"
 
 using namespace std;
-const double pi = 3.14159;
+const double pi = 3.14159265359;
 
 class DoublePendulum {
 private:
