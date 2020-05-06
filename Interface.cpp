@@ -11,8 +11,9 @@ void Interface:: control() {
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			// "close requested" event: we close the window
 			if (event.type == sf::Event::Closed)
+				window.close();
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 				window.close();
 		}
 }
@@ -45,34 +46,22 @@ void Interface::drawDP(double m1, double m2, double l1, double l2, double theta1
 	sf::CircleShape origin(5.0);
 	origin.setOrigin(5.0,5.0);
 	origin.setPosition(pos);
-	origin.setFillColor(sf::Color::White);
+	origin.setFillColor(sf::Color::Blue);
 	window.draw(origin);
 
 	// mass1 :
-	sf::CircleShape mass1(15.0);
-	mass1.setOrigin(15.0,15.0);
+	sf::CircleShape mass1(10.0);
+	mass1.setOrigin(10.0,10.0);
 	mass1.setPosition(center1);
-	mass1.setFillColor(sf::Color::Magenta);
+	mass1.setFillColor(sf::Color::Yellow);
 	window.draw(mass1);
 
 
-	sf::CircleShape mass2(15.0);
-	mass2.setOrigin(15.0,15.0);
+	sf::CircleShape mass2(10.0);
+	mass2.setOrigin(10.0,10.0);
 	mass2.setPosition(center2);
-	mass2.setFillColor(sf::Color::Cyan);
-	//cout << mass2.getPosition().x << "  " << mass2.getPosition().y << endl;
+	mass2.setFillColor(sf::Color::Red);
 	window.draw(mass2);
-
-
-	//// first arm:
-	//sf::RectangleShape line1(sf:: Vector2f(l1,3.0));
-	//line1.setOrigin(pos);
-	//line1.setRotation(theta1);
-	//line1.setFillColor(sf::Color::Cyan);
-	//window.draw(line1);
-	//
-	
-
 }
 
 void Interface::display() {
